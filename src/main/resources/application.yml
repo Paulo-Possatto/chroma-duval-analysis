@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: duval-chromatography-analysis
+  datasource:
+    url: jdbc:postgresql://localhost:5433/chroma_db
+    username: chroma_user
+    password: chroma_pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  batch:
+    jdbc:
+      initialize-schema: always
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/chroma
+      database: chroma_data
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  listener:
+    simple:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 5

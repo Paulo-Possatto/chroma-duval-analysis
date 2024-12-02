@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="default">
+
+        <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="File" class="ch.qos.logback.core.FileAppender">
+            <file>/var/log/chroma/chroma-application.log</file>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="root" level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="File"/>
+        </logger>
+
+        <logger name="org.springframework" level="WARN">
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <logger name="org.hibernate" level="WARN">
+            <appender-ref ref="File"/>
+        </logger>
+
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="File"/>
+        </root>
+    </springProfile>
+
+</configuration>
